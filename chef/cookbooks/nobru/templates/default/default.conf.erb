@@ -1,0 +1,29 @@
+server {
+    listen   80;
+    listen   [::]:80 default_server ipv6only=on;
+
+    root <%= node[:nobru][:web][:default][:docroot] %>;
+    index index.php index.html index.htm;
+
+    server_name <%= node[:nobru][:web][:default][:host] %>;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php-fpm-www.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+            root /usr/share/nginx/www;
+    }
+
+    error_log <%= node[:nobru][:web][:default][:logpath] %>/default.error.log;
+    access_log <%= node[:nobru][:web][:default][:logpath] %>/default.access.log;
+}

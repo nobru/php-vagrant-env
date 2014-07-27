@@ -1,0 +1,19 @@
+name                "nobru"
+maintainer          "Nobru"
+maintainer_email    "brunobacus@gmail.com"
+version             "0.0.1"
+
+depends 'apt'
+depends 'build-essential'
+depends 'chef-client'
+depends 'chef_handler'
+depends 'timezone-ii'
+depends 'vim'
+depends 'ant'
+depends 'mysql'
+depends 'database'
+depends 'memcached'
+depends 'nginx'
+depends 'php-fpm'
+depends 'php'
+depends 'phing'
